@@ -34,8 +34,10 @@ LOCAL_VALUE_TYPES = ['glm', 'mistral']
 LOCAL_VALUE_IDX = 0
 USE_PRM = False
 
-INFERENCE_LOCAL = False
+# INFERENCE_LOCAL = False
+INFERENCE_LOCAL = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 VALUE_LOCAL = False
+# VALUE_LOCAL = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 
 # implement the inference model
 if INFERENCE_MODEL_DIR is not None:
