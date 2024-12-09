@@ -78,6 +78,7 @@ def get_local_response_llama(query, model, tokenizer, max_length=2048, truncatio
             response = processed_string.split('<|end_of_text|>')[0].strip()
 
             # print(f'获得回复:{response}\n')
+            # in english: print(f'obtain response:{response}\n')
             all_response = response
             break
         except Exception as e:

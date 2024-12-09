@@ -111,6 +111,7 @@ def MCTS_search(mcts_task):
         time_start = time.time()
         while time.time() < timeLimit:
             print(f'<开始新搜索轮次，目前总时间:{time.time() - time_start}>\n')
+            # in english: the above translation is: print(f'<start new search round, current total time:{time.time() - time_start}>\n')
             flag, node, root = executeRound(root, mcts_task)
             if flag:
                 print('已找到解决方案！\n')

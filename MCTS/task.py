@@ -85,6 +85,7 @@ class MCTS_Task(SearchTask):
                                 self.truncation, self.do_sample, self.max_new_tokens)
         if not response:
             print('获得下一步失败！\n')
+            # in english: the above translation is: print('obtain next step fail!\n')
             return ''
 
         if len(response) > 5:
@@ -133,13 +134,16 @@ class MCTS_Task(SearchTask):
                 stp = p.split('Next step:')[1].strip()
                 if len(stp) < 2:
                     print('输出步骤过短！\n')
+                    # in english: the above translation is: print('output step too short!\n')
                     return ''
                 if stp in y:
                     print('输出步骤重复！\n')
+                    # in english: the above translation is: print('output step repeated!\n')
                     return ''
 
                 revised_ = 'Step ' + str(step_n) + ': ' + stp
                 print(f'标准化后新的步骤:{revised_}\n')
+                # in english: the above translation is: print(f'standardized new step:{revised_}\n')
                 return revised_ + '\n'
 
             elif "Step" in p and ":" in p:
@@ -156,19 +160,23 @@ class MCTS_Task(SearchTask):
 
                 revised_ = 'Step ' + str(step_n) + ': ' + p_
                 print(f'标准化后新的步骤:{revised_}\n')
+                # in english: the above translation is: print(f'standardized new step:{revised_}\n')
                 return revised_ + '\n'
 
             else:
                 p_ = p.strip()
                 if len(p_) < 3:
                     print('输出步骤过短！\n')
+                    # in english: the above translation is: print('output step too short!\n')
                     return ''
                 if p_ in y:
                     print('输出步骤重复！\n')
+                    # in english: the above translation is: print('output step repeated!\n')
                     return ''
 
                 revised_ = 'Step ' + str(step_n) + ': ' + p_
                 print(f'标准化后新的步骤:{revised_}\n')
+                # in english: the above translation is: print(f'standardized new step:{revised_}\n')
                 return revised_ + '\n'
 
     def get_next_step_use_reflection(self, y, step_n, reflection):  # 暂不支持 case-prompt
@@ -183,6 +191,7 @@ class MCTS_Task(SearchTask):
                                 self.truncation, self.do_sample, self.max_new_tokens)
         if not response:
             print('获得下一步失败！\n')
+            # in english: the above translation is: print('obtain next step fail!\n')
             return ''
 
         if len(response) > 5:
@@ -231,13 +240,16 @@ class MCTS_Task(SearchTask):
                 stp = p.split('Next step:')[1].strip()
                 if len(stp) < 2:
                     print('输出步骤过短！\n')
+                    # in english: the above translation is: print('output step too short!\n')
                     return ''
                 if stp in y:
                     print('输出步骤重复！\n')
+                    # in english: the above translation is: print('output step repeated!\n')
                     return ''
 
                 revised_ = 'Step ' + str(step_n) + ': ' + stp
                 print(f'标准化后新的步骤:{revised_}\n')
+                # in english: the above translation is: print(f'standardized new step:{revised_}\n')
                 return revised_ + '\n'
 
             elif "Step" in p and ":" in p:
@@ -246,14 +258,17 @@ class MCTS_Task(SearchTask):
                 p_ = p_.split('Step')[0].strip()
                 if len(p_) < 4:
                     print('输出步骤过短！\n')
+                    # in english: the above translation is: print('output step too short!\n')
                     return ''
                 p_ = p_[1:].strip()
                 if p_ in y:
                     print('输出步骤重复！\n')
+                    # in english: the above translation is: print('output step repeated!\n')
                     return ''
 
                 revised_ = 'Step ' + str(step_n) + ': ' + p_
                 print(f'标准化后新的步骤:{revised_}\n')
+                # in english: the above translation is: print(f'standardized new step:{revised_}\n')
                 return revised_ + '\n'
 
             else:
@@ -281,6 +296,7 @@ class MCTS_Task(SearchTask):
             cnt -= 1
         if not response:
             print('获得意见失败！\n')
+            # in english: the above translation is: print('obtain reflection fail!\n')
             return '<end>'
 
         p = ''
@@ -292,20 +308,26 @@ class MCTS_Task(SearchTask):
             if '已解决' in p or '已经解决' in p:
                 if step_n > 1:
                     print('此步问题已解决，停止下探。\n')
+                    # in english: the above translation is: print('this step problem solved, stop exploring.\n')
                     print('标准化后的意见: <end>\n')
+                    # in english: the above translation is: print('standardized reflection: <end>\n')
                     return '<end>'
             print('标准化后的意见: <continue>\n')
+            # in english: the above translation is: print('standardized reflection: <continue>\n')
             return '<continue>'
 
         else:
             if 'unsolved' in p or step_n <= 1:
                 print('标准化后的意见: <continue>\n')
+                # in english: the above translation is: print('standardized reflection: <continue>\n')
                 return '<continue>'
             elif 'solved' in p:
                 print('标准化后的意见: <end>\n')
+                # in english: the above translation is: print('standardized reflection: <end>\n')
                 return '<end>'
             else:
                 print('标准化后的意见: <continue>\n')
+                # in english: the above translation is: print('standardized reflection: <continue>\n')
                 return '<continue>'
 
     def get_reflection(self, y, step_n):
@@ -333,6 +355,7 @@ class MCTS_Task(SearchTask):
             cnt -= 1
         if not response:
             print('获得意见失败！\n')
+            # in english: the above translation is: print('obtain reflection fail!\n')
             return ''
 
         p = ''
@@ -358,6 +381,7 @@ class MCTS_Task(SearchTask):
         else:
             if 'Problem solved' in p:
                 print('标准化后的意见: <end>\n')
+                # in english: the above translation is: print('standardized reflection: <end>\n')
                 return '<end>'
             else:
                 if 'Analysis:' not in p:
@@ -365,6 +389,7 @@ class MCTS_Task(SearchTask):
                     return ''
                 revised_ = p.split('Analysis:')[1].strip()
                 print(f'标准化后的意见:{revised_}\n')
+                # in english: the above translation is: print(f'standardized reflection:{revised_}\n')
                 return revised_
 
     def get_step_value(self, y):
@@ -379,6 +404,7 @@ class MCTS_Task(SearchTask):
             value = get_value(prompt_answer, self.value_method, self.temperature, self.max_tokens, self.seed,
                               self.max_length, self.low, self.high)
             print(f'获得评分:{value}\n')
+            # in english: the above translation is: print(f'obtain score:{value}\n')
             self.value_cache.update({y: value})
             return value
 
@@ -388,6 +414,7 @@ class MCTS_Task(SearchTask):
                                  self.max_length, self.low, self.high)
             value = self.value_outputs_unwrap(response, self.low, self.high)
             print(f'获得评分:{value}\n')
+            # in english: the above translation is: print(f'obtain score:{value}\n')
             self.value_cache.update({y: value})
             return value
 
